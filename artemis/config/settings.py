@@ -145,6 +145,15 @@ class Settings(BaseSettings):
         ),
     )
 
+    # LLM I/O logging
+    ARTEMIS_LLM_IO_LOG: bool = Field(
+        default=True,
+        description=(
+            "Write every Gemini request (system instructions, input, output)"
+            " to <traces>/<session_id>/llm_calls/ as .json + .md files."
+        ),
+    )
+
     # Paths & Storage
     TRACES_PATH: Path = Field(default_factory=get_default_traces_path)
     DATA_ENGINE_DB_PATH: Path = Field(default_factory=get_data_engine_db_path)

@@ -593,6 +593,13 @@ class DataEngine:
         self.current_session_id = session_id
         self.session_start_time = time.time()
 
+        try:
+            from artemis.services.llm_io_recorder import install as install_llm_io_recorder
+
+            install_llm_io_recorder()
+        except Exception as exc:
+            logger.warning(f"LLM I/O recorder not installed: {exc}")
+
         # Clear old pause file if it exists
         pause_file = PAUSE_FILE
         if pause_file.exists():
